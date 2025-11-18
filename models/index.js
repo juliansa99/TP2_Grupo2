@@ -1,6 +1,7 @@
+//Traigo de Sequelize la parte que me deja definir los tipos de datos
 const { DataTypes } = require('sequelize');
-// ojo acá: usá el mismo nombre de carpeta que tengas: "connection" o "conection"
-const sequelize = require('../connection/db'); // o '../conection/db' si la carpeta tiene una sola n
+//Traigo la conexión a la base de datos
+const sequelize = require('../connection/db'); 
 
 const Usuario = require('./Usuario')(sequelize, DataTypes);
 const Clase = require('./Clase')(sequelize, DataTypes);
