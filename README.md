@@ -5,31 +5,30 @@ Está desarrollado con **Node.js**, **Express**, **Sequelize** y **MySQL**.
 
 ---
 
-## 📌 Entidades
-
-### Usuario
+Entidades
+Usuario
 - id
 - nombre
 - email
 
-### Clase
+Clase
 - id
 - nombre
 - dia
 - horario
 - cupo
 
-### Reserva
+Reserva
 - id
 - usuarioId (FK)
 - claseId (FK)
 
-**Relación:**
+Relación:
 Un Usuario puede reservar varias Clases, y cada Clase puede tener varias Reservas.
 
 ---
 
-## Cómo correrlo
+Cómo correrlo:
 
 ```bash
 npm install
