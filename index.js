@@ -16,6 +16,16 @@ app.get('/ping', (req, res) => {
 console.log("✅ Cargando rutas de usuarios...");
 app.use('/usuarios', usuarioRutas);
 
+//-----------------------------------------------
+
+// RUTA DE CLASE
+const claseRutas = require('./routes/claseRutas');
+
+//CONECTAMOS LAS RUTAS DE CLASES
+console.log("✅ Cargando rutas de clases...");
+app.use('/clases', claseRutas); 
+
+//-----------------------------------------------
 
 // Conexión + sync de modelos + levantar server
 sequelize.authenticate()
@@ -34,3 +44,4 @@ sequelize.authenticate()
   .catch((err) => {
     console.error('Error al conectar o sincronizar la base de datos:', err);
   });
+
