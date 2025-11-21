@@ -27,9 +27,11 @@ async function obtenerClase(req, res, next) {
 async function crearClase(req, res, next) {
   try {
     const nuevaClase = await claseServicio.crearClase(req.body);
-    // 201 Created (Éxito y creación de un nuevo recurso)
     res.status(201).json(nuevaClase); 
   } catch (error) {
+//if (error.errors && error.errors[0].validatorName === 'isDate') {
+//return res.status(400).json({ error: 'La fecha proporcionada no es válida.' });
+//}
     next(error);
   }
 }

@@ -39,7 +39,8 @@ async function eliminarUsuario(req, res, next) {
   } catch (error) {
     if (error.message === 'USUARIO_NO_EXISTE') {
       res.status(404).json({ error: 'Usuario no encontrado' });
-    } else next(error);
+    } 
+    else next(error);
   }
 }
 
