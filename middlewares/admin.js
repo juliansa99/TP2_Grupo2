@@ -1,13 +1,27 @@
-const buscarUsuario = require('../services/usuarioServicio');
+const usuarioServicio = require('../services/usuarioServicio');
 
 async function esAdmin(req, res, next) {
-const usuario = await buscarUsuario.obtenerPorId(req.params.adminId)
-const isAdmin = usuario.isAdmin; 
-  if (isAdmin === true) {
-    next(); // puede continuar
-  } else {
-    res.status(403).json({ error: 'Acceso denegado. Solo para administradores.' });
+  try {
+    const usuario = await usuarioServicio.obtenerPorId(req.params.adminId);
+
+    if (!usuario) {
+      return res.status(404).json({
+        error: 'El administrador no existe en la base de datos.'
+      });
+    }
+
+    if (usuario.isAdmin !== true) {
+      return res.status(403).json({
+        error: 'Acceso denegado. Solo los administradores pueden realizar esta acción.'
+      });
+    }
+
+    next();
+
+  } catch (error) {
+    next(error);
   }
 }
 
 module.exports = esAdmin;
+
