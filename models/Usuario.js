@@ -1,5 +1,3 @@
-const { all } = require("../routes/claseRutas");
-
 module.exports = (sequelize, DataTypes) => {
   const Usuario = sequelize.define('Usuario', {
     id: {
@@ -10,45 +8,26 @@ module.exports = (sequelize, DataTypes) => {
     nombre: {
       type: DataTypes.STRING,
       allowNull: false,
-      // VALIDACION NOMBRE
       validate: {
-        notEmpty: {
-          msg: "El nombre no puede estar vacío"
-        },
-        len: {
-          args: [2, 100],
-          msg: "El nombre debe tener entre 2 y 100 caracteres"
-        }
+        notEmpty: { msg: "El nombre no puede estar vacío" },
+        len: { args: [2, 100], msg: "El nombre debe tener entre 2 y 100 caracteres" }
       }
-      //----------------------
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      // VALIDACION EMAIL
-      unique: {
-        msg: "Este email ya está registrado"
-      },
+      unique: { msg: "Este email ya está registrado" },
       validate: {
-        notEmpty: {
-          msg: "El email es obligatorio"
-        },
-        isEmail: {
-          msg: "Debe ser un email válido"
-        }
+        notEmpty: { msg: "El email es obligatorio" },
+        isEmail: { msg: "Debe ser un email válido" }
       }
-      //--------------------
     },
     telefono: {
       type: DataTypes.STRING,
       allowNull: true,
-      // VALIDACION TELEFONO
       validate: {
-        is: {
-          msg: "El teléfono solo puede contener números"
-        }
+        is: { args: [/^\d+$/], msg: "El teléfono solo puede contener números" }
       }
-      //---------------------
     },
     isAdmin: {
       type: DataTypes.BOOLEAN,
