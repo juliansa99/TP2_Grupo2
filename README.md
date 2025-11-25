@@ -199,11 +199,8 @@ PUT /clases/:id/:adminId
 DELETE /clases/:id/:adminId
 ```
 
----
 
-```
 
----
 
 
 
