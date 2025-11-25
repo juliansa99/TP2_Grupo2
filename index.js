@@ -1,46 +1,44 @@
 const express = require('express');
 const { sequelize } = require('./models'); 
+
+// Importar rutas
 const usuarioRutas = require('./routes/usuarioRutas');
+const reservaRutas = require('./routes/reservaRutas');
+const claseRutas = require('./routes/claseRutas');
 
 const app = express();
 const PORT = 3000;
 
+// Middlewares globales
 app.use(express.json());
+
+// Rutas
 
 // Ruta de prueba
 app.get('/ping', (req, res) => {
   res.json({ mensaje: 'pong 🏓' });
 });
 
-//CONECTAMOS LAS RUTAS DE USUARIOS
-console.log("✅ Cargando rutas de usuarios...");
 app.use('/usuarios', usuarioRutas);
+app.use('/reservas', reservaRutas);
+app.use('/clases', claseRutas);
 
-//-----------------------------------------------
-
-// RUTA DE CLASE
-const claseRutas = require('./routes/claseRutas');
-
-//CONECTAMOS LAS RUTAS DE CLASES
-console.log("✅ Cargando rutas de clases...");
-app.use('/clases', claseRutas); 
-
-//-----------------------------------------------
-
-// Conexión + sync de modelos + levantar server
+// ----------------------------
+// Conexión DB y servidor
+// ----------------------------
 sequelize.authenticate()
   .then(() => {
-    console.log('Conectado a MySQL correctamente');
-    return sequelize.sync({ alter: true });
+    console.log('✅ Conectado a MySQL correctamente');
+    // Si querés que altere la estructura según los modelos:
+    // return sequelize.sync({ alter: true });
+    return sequelize.sync();
   })
   .then(() => {
-    console.log('Modelos sincronizados con la base de datos');
-
+    console.log('✅ Modelos sincronizados con la base de datos');
     app.listen(PORT, () => {
-      console.log(`Servidor escuchando en http://localhost:${PORT}`);
+      console.log(`🚀 Servidor escuchando en http://localhost:${PORT}`);
     });
   })
   .catch((err) => {
-    console.error('Error al conectar o sincronizar la base de datos:', err);
+    console.error('❌ Error al conectar o sincronizar la base de datos:', err);
   });
-
