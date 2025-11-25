@@ -23,6 +23,10 @@ app.use('/usuarios', usuarioRutas);
 app.use('/reservas', reservaRutas);
 app.use('/clases', claseRutas);
 
+app.use((req, res, next) => {
+  res.status(404).json({ error: 'Ruta no encontrada' });
+});
+
 // ----------------------------
 // Conexión DB y servidor
 // ----------------------------
